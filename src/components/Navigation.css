@@ -1,0 +1,23 @@
+nav {
+  /* position: fixed; */
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px !important;
+  padding-top: 10px !important;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #fff !important;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+nav ul li a:hover {
+  color: rgb(214, 214, 214);
+}
