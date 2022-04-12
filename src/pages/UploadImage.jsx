@@ -20,30 +20,20 @@ const UploadImage = () => {
     uploaderEmail: localStorage.getItem("user"),
   });
 
-  // On file select (from the pop up)
   const onFileChange = (event) => {
-    // Update the state
     setSelectedFile(event.target.files[0]);
   };
 
-  // On file upload (click the upload button)
   const onFileUpload = async () => {
-    // Create an object of formData
     const formData = new FormData();
 
-    // Update the formData object
     formData.append("file", selectedFile, selectedFile.name);
-
-    // Details of the uploaded file
-    console.log(selectedFile);
-
-    // Request made to the backend api
-    // Send formData object
     const data = await axios.post("/", formData);
     if (data) {
       const resp = await axios.post("/saveImageData", {
         ...pictureData,
         imageName: data.data.filename,
+        uploaderEmail: localStorage.getItem("user"),
       });
     }
     setPictureData({
@@ -62,45 +52,8 @@ const UploadImage = () => {
     setResponse(data.data.filename);
   };
 
-  // File content to be displayed after
-  // file upload is complete
-  const fileData = () => {
-    if (selectedFile) {
-      return (
-        <div>
-          <h2>File Details:</h2>
-
-          <p>File Name: {selectedFile.name}</p>
-
-          <p>File Type: {selectedFile.type}</p>
-
-          <p>Last Modified: {selectedFile.lastModifiedDate.toDateString()}</p>
-          {response && (
-            <div>
-              <h2>Response:</h2>
-              <p>{response}</p>
-              <img
-                style={{ maxWidth: "200px" }}
-                src={`http://localhost:5000/static/uploads/` + response}
-                alt=""
-              />
-            </div>
-          )}
-        </div>
-      );
-    } else {
-      return (
-        <div>
-          <br />
-          <h4>Choose before Pressing the Upload button</h4>
-        </div>
-      );
-    }
-  };
-
   return (
-    <div>
-      <h3 className="text-center">Register a Photograph and Details.</h3>
+    <div className="mt-2 mb-2">
       <div>
         <Form>
           <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -111,7 +64,7 @@ const UploadImage = () => {
             </Form.Text>
           </Form.Group>
           <Row>
-            <Col xs={12} md={4}>
+            <Col xs={12}>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Name</Form.Label>
                 <Form.Control
@@ -123,7 +76,7 @@ const UploadImage = () => {
                 />
               </Form.Group>
             </Col>
-            <Col xs={12} md={4}>
+            <Col xs={12}>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Gender</Form.Label>
                 <Form.Select
@@ -139,7 +92,7 @@ const UploadImage = () => {
                 </Form.Select>
               </Form.Group>
             </Col>
-            <Col xs={12} md={4}>
+            <Col xs={12}>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Date Of Birth</Form.Label>
                 <Form.Control
@@ -152,7 +105,7 @@ const UploadImage = () => {
               </Form.Group>
             </Col>
 
-            <Col xs={12} md={4}>
+            <Col xs={12}>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Minimum Age</Form.Label>
                 <Form.Control
@@ -164,7 +117,7 @@ const UploadImage = () => {
                 />
               </Form.Group>
             </Col>
-            <Col xs={12} md={4}>
+            <Col xs={12}>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Maximum Age</Form.Label>
                 <Form.Control
@@ -177,7 +130,7 @@ const UploadImage = () => {
               </Form.Group>
             </Col>
 
-            <Col xs={12} md={4}>
+            <Col xs={12}>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Color</Form.Label>
                 <Form.Select
@@ -193,7 +146,7 @@ const UploadImage = () => {
                 </Form.Select>
               </Form.Group>
             </Col>
-            <Col xs={12} md={4}>
+            <Col xs={12}>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>City</Form.Label>
                 <Form.Control
@@ -205,7 +158,7 @@ const UploadImage = () => {
                 />
               </Form.Group>
             </Col>
-            <Col xs={12} md={4}>
+            <Col xs={12}>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>State</Form.Label>
                 <Form.Control
@@ -217,7 +170,7 @@ const UploadImage = () => {
                 />
               </Form.Group>
             </Col>
-            <Col xs={12} md={4}>
+            <Col xs={12}>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Country</Form.Label>
                 <Form.Control
@@ -229,7 +182,7 @@ const UploadImage = () => {
                 />
               </Form.Group>
             </Col>
-            <Col xs={12} md={4}>
+            <Col xs={12}>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Contact Number</Form.Label>
                 <Form.Control
@@ -241,8 +194,8 @@ const UploadImage = () => {
                 />
               </Form.Group>
             </Col>
-            <Col xs={12} md={4}></Col>
-            <Col xs={12} md={4}></Col>
+            <Col xs={12}></Col>
+            <Col xs={12}></Col>
             <Col xs={12} md={12}>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Description</Form.Label>
@@ -271,9 +224,43 @@ const UploadImage = () => {
           Upload Details!
         </Button>
       </div>
-      {fileData()}
+      {/* {fileData()} */}
     </div>
   );
 };
 
 export default UploadImage;
+
+// const fileData = () => {
+//   if (selectedFile) {
+//     return (
+//       <div>
+//         <h2>File Details:</h2>
+
+//         <p>File Name: {selectedFile.name}</p>
+
+//         <p>File Type: {selectedFile.type}</p>
+
+//         <p>Last Modified: {selectedFile.lastModifiedDate.toDateString()}</p>
+//         {response && (
+//           <div>
+//             <h2>Response:</h2>
+//             <p>{response}</p>
+//             <img
+//               style={{ maxWidth: "200px" }}
+//               src={`http://localhost:5000/static/uploads/` + response}
+//               alt=""
+//             />
+//           </div>
+//         )}
+//       </div>
+//     );
+//   } else {
+//     return (
+//       <div>
+//         <br />
+//         <h4>Choose before Pressing the Upload button</h4>
+//       </div>
+//     );
+//   }
+// };

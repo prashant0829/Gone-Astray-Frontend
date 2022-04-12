@@ -14,6 +14,7 @@ import UploadImage from "./pages/UploadImage";
 import Home from "./pages/Home";
 import "./App.css";
 import Check from "./pages/Check";
+import ComplainRegistration from "./pages/complainRegistration/ComplainRegistration";
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -29,7 +30,7 @@ export default function App() {
     <Router>
       <div>
         <Routes>
-          <Route
+          {/* <Route
             path="/login"
             element={
               !isLoggedIn ? (
@@ -71,7 +72,35 @@ export default function App() {
               )
             }></Route>
 
-          <Route path="/upload-image" element={<UploadImage />}></Route>
+          <Route path="/upload-image" element={<UploadImage />}></Route> */}
+          <Route
+            path="/"
+            element={
+              <Home isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+            }></Route>
+          <Route
+            path="/login"
+            element={
+              <Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+            }></Route>
+          <Route
+            path="/register"
+            element={
+              <Register isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+            }></Route>
+          <Route
+            path="/check"
+            element={
+              <Check isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+            }></Route>
+          <Route
+            path="/register/complain"
+            element={
+              <ComplainRegistration
+                isLoggedIn={isLoggedIn}
+                setIsLoggedIn={setIsLoggedIn}
+              />
+            }></Route>
         </Routes>
       </div>
     </Router>

@@ -19,6 +19,11 @@ const Navigation = ({ isLoggedIn, setIsLoggedIn }) => {
                 <Link to="/check">Check</Link>
               </li>
             )}
+            {isLoggedIn && (
+              <li>
+                <Link to="/register/complain">Register Complain</Link>
+              </li>
+            )}
             {!isLoggedIn && (
               <li>
                 <Link to="/login">Login</Link>
